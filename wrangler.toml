@@ -1,25 +1,7 @@
 name = "my-portfolio"
 compatibility_date = "2025-09-12"
-
-# If you're using Cloudflare Pages, this section is optional
-# For Workers Sites or custom Workers, include this:
-# main = "worker.js" # Optional if you're not using custom routing logic
-
-# Build configuration
-
-[assets]
-directory = "./dist"  # Replace with your actual build output folder
+pages_build_output_dir = "dist"
 
 [build]
 command = "npm run build"
-cwd = "."  # Root of your project
-
-
-# Optional: Enable build comments on pull requests
-[build.environment]
-ENABLE_BUILD_COMMENTS = "true"
-
-# Optional: Add environment-specific settings
-# [env.production]
-# route = "example.com/*"
-# zone_id = "your-zone-id"
+cwd = "."
