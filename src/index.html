@@ -36,11 +36,8 @@
   <link rel="dns-prefetch" href="#">
   <link rel="preconnect" href="https://fonts.gstatic.com/">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
-  <!-- <link href="./index_files/css2" rel="stylesheet">
-  <link href="./index_files/css2(1)" rel="stylesheet">
-  <link href="./index_files/css2(2)" rel="stylesheet"> -->
   <link href="index.css" rel="stylesheet">
-  <script async="" src="index.js"></script>
+  <script src="index.js" defer></script>
   <!-- Clarity tracking code for https://ankit.qzz.io -->
   <script>
     (function (c, l, a, r, i, t, y) {
@@ -169,10 +166,10 @@
         </footer>
       </div>
     </div>
-    <div class="featured-subscribers relative flex-both-center hidden" id="share_social" style="display: none;">
+    <div class="featured-subscribers relative flex-both-center hidden" id="share_social">
       <div id="shareBackdrop" class="modal-backdrop fadeIn"></div>
       <div class="relative share-modal-out">
-        <div class="share-items-inside" id="share_modal" style="display: none;">
+        <div class="share-items-inside" id="share_modal">
           <div class="share-banner justify-center">
             <div class="text-center">
               <div class="text-16 font-inter font-weight-700 w-full">Share this Portfolio</div>
@@ -190,9 +187,7 @@
           <div style="box-sizing: border-box; width: 100%; padding-left: 32px; padding-right: 32px;  ">
             <div class="share-content-wrapper w-100">
               <div class="share-items-wrapper">
-                <a class="share-item font-inter text-14"
-                  href="https://x.com/intent/tweet?text=Check%20out%20Ankit%20Pandey%20(@iankitpandey)%27s%20portfolio!%20%0a%0ahttps://ankit.qzz.io"
-                  target="_blank">
+                <a class="share-item font-inter text-14" id="twitterShare" href="" target="_blank">
                   <div class="flex item-center">
                     <div class="share-svg" style="background-color: black;">
                       <svg width="24" height="18" viewBox="0 0 1200 1226" fill="none"
@@ -214,8 +209,7 @@
                   </div>
                 </a>
 
-                <a class="share-item font-inter text-14"
-                  href="https://www.facebook.com/sharer/sharer.php?u=https://ankit.qzz.io" target="_blank">
+                <a class="share-item font-inter text-14" id="facebookShare" href="" target="_blank">
                   <div class="flex item-center">
                     <div class="share-svg"><svg width="40" height="36" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -234,9 +228,8 @@
                     </svg>
                   </div>
                 </a>
-                <a class="share-item font-inter text-14"
-                  href="mailto:?subject=Check%20out%20this%20Portfolio!&amp;body=Check%20out%20Ankit%20Pandey%20(@iankitpandey)%27s%20portfolio!%20-%20https://ankit.qzz.io"
-                  target="_blank">
+
+                <a class="share-item font-inter text-14" id="emailShare" href="" target="_blank">
                   <div class="flex item-center">
                     <div class="share-svg"><svg width="20" height="17" viewBox="0 0 20 17" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -266,9 +259,7 @@
                     fill="black"></path>
                 </svg></span>
               <input class="input-area w-full link-input font-inter font-weight-400 text-14" type="text"
-                value="https://ankit.qzz.io" disabled="">
-              <input class="input-area w-full link-input" id="link-input" type="text" value="https://ankit.qzz.io"
-                hidden="">
+                value="https://ankit.qzz.io" id="displayURL" disabled="">
               <button class="share-copy font-inter font-weight-700 text-14" id="share-copy">Copy</button>
             </div>
 
