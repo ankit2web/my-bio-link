@@ -1,5 +1,15 @@
 "use strict";
 
+window.addEventListener('load', function() {
+  var loader = document.getElementById('loader');
+  if (loader) {
+    // this.window.onload = function() {
+    // setTimeout(function() {
+    loader.style.display = 'none';
+    // }, 10000);
+  }
+});
+
 const disallowedDomains = [
   "ankit.qzz.io",
   "127.0.0.1",
