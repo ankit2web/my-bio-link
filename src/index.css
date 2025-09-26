@@ -616,15 +616,18 @@ button:active {
 
 .loader-wrapper {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: #1ABCFE;
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .loader {
+}
+
+.loader {
     color: #FFF;
     position: relative;
     font-size: 11px;
@@ -633,9 +636,10 @@ button:active {
     width: 1em;
     height: 4em;
     animation-delay: -0.16s;
-  }
-  .loader:before,
-  .loader:after {
+}
+
+.loader:before,
+.loader:after {
     content: '';
     position: absolute;
     top: 0;
@@ -644,19 +648,24 @@ button:active {
     width: 1em;
     height: 4em;
     animation: escaleY 1s infinite ease-in-out;
-  }
-  .loader:before {
+}
+
+.loader:before {
     left: -2em;
     animation-delay: -0.32s;
-  }
-  
-  @keyframes escaleY {
-    0%, 80%, 100% {
-      box-shadow: 0 0;
-      height: 4em;
+}
+
+@keyframes escaleY {
+
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 0;
+        height: 4em;
     }
+
     40% {
-      box-shadow: 0 -2em;
-      height: 5em;
+        box-shadow: 0 -2em;
+        height: 5em;
     }
-  }
+}
