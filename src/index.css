@@ -71,7 +71,9 @@ html {
 }
 
 .font-inter {
-    font-family: Inter, sans-serif
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "calt" 0;
 }
 
 .font-weight-400 {
@@ -211,8 +213,26 @@ html {
     justify-content: center;
     border-radius: 8px;
     opacity: 0;
-    transform: scale(.9);
-    transition: all .2s
+    transition: opacity .2s ease
+}
+
+/* Firefox Android font rendering and scaling stability (scoped to modal) */
+#share_modal,
+#share_modal * {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "calt" 0;
+}
+
+/* Avoid blurry text during scale/opacity transitions in some browsers */
+#share_modal {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform, opacity;
 }
 
 .hidden {
@@ -606,12 +626,12 @@ button {
 }
 
 button:active {
-    transform: scale(0.98);
+    /* removed transform here as well to prevent text distortion on Firefox */
 }
 
 .active-modal {
     opacity: 1;
-    transform: scale(1)
+    /* removed transform to avoid text rasterization glitches on Firefox Android */
 }
 
 .loader-wrapper {
