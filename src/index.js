@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const _twitterShare = document.getElementById("twitterShare");
   const _facebookShare = document.getElementById("facebookShare");
   const _emailShare = document.getElementById("emailShare");
+  const _shareBackdrop = document.getElementById("shareBackdrop");
   const _location = window.location.href;
 
   _console.log("🔍 Element references:", {
@@ -69,12 +70,31 @@ document.addEventListener("DOMContentLoaded", function () {
     _shareModalParent: !!_shareModalParent,
     _copyBtn: !!_copyBtn,
     _displayURLInput: !!_displayURLInput,
-    _twitterShare: !!_twitterShare
+    _twitterShare: !!_twitterShare,
+    _shareBackdrop: !!_shareBackdrop
   });
+
+  function closeShareAction() {
+    _console.log("🔴 closeShareAction invoked");
+    if (!_shareModal || !_shareModalParent) {
+      _console.warn("⚠️ #share_modal not found");
+      _console.warn("⚠️ #share_social not found");
+      return;
+    }
+
+    if (_shareModal.classList.contains("active-modal")) {
+      _shareModal.classList.remove("active-modal");
+      _shareModalParent.classList.add("hidden");
+      _console.log("✅ active-modal removed from #share_modal");
+      _console.log("✅ #share_social hidden by adding hidden class");
+    } else {
+      _console.log("ℹ️ closeShareAction ignored because modal is not active");
+    }
+  }
 
   if (_openShare) {
     _openShare.addEventListener("click", function () {
-      _console.log("🟢 #openShare clicked");
+      _console.log("🟢 #openShare clicked - opening share modal");
       if (_shareModal) {
         _shareModal.classList.add("active-modal");
         _shareModalParent.classList.remove("hidden");
@@ -91,20 +111,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (_closeShare) {
     _closeShare.addEventListener("click", function () {
-      _console.log("🔴 #closeShare clicked");
-      if (_shareModal) {
-        _shareModal.classList.remove("active-modal");
-        _shareModalParent.classList.add("hidden");
-        _console.log("✅ active-modal removed from #share_modal");
-        _console.log("✅ #share_social hidden by adding hidden class");
-      } else {
-        _console.warn("⚠️ #share_modal not found");
-        _console.warn("⚠️ #share_social not found");
+      if (_shareModal && _shareModal.classList.contains("active-modal")) {
+        _console.log("🔴 #closeShare clicked - closing share modal");
+        closeShareAction();
       }
     });
   } else {
     _console.warn("⚠️ #closeShare not found");
   }
+
+  if (_shareBackdrop) {
+    _shareBackdrop.addEventListener("click", function () {
+      if (_shareModal && _shareModal.classList.contains("active-modal")) {
+        _console.log("🔴 Backdrop clicked - closing share modal");
+        closeShareAction();
+      }
+    });
+  } else {
+    _console.warn("⚠️ #shareBackdrop not found");
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" || e.key === "Esc") {
+      if (_shareModal && _shareModal.classList.contains("active-modal")) {
+        _console.log("🔴 Escape pressed - closing share modal");
+        closeShareAction();
+      }
+    }
+  });
 
   if (_copyBtn) {
     _copyBtn.addEventListener("click", function () {
