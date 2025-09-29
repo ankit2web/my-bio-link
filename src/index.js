@@ -1,6 +1,6 @@
 "use strict";
 
-window.addEventListener('load', function () {
+document.addEventListener('DOMContentLoaded', function () {
   var loader = document.getElementById('loader');
   if (loader) {
     // this.window.onload = function() {
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         _console.warn("⚠️ #share_modal not found");
         _console.warn("⚠️ #share_social not found");
       }
-    });
+    }, { passive: true });
   } else {
     _console.warn("⚠️ #openShare not found");
   }
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         _console.log("🔴 #closeShare clicked - closing share modal");
         closeShareAction();
       }
-    });
+    }, { passive: true });
   } else {
     _console.warn("⚠️ #closeShare not found");
   }
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
         _console.log("🔴 Backdrop clicked - closing share modal");
         closeShareAction();
       }
-    });
+    }, { passive: true });
   } else {
     _console.warn("⚠️ #shareBackdrop not found");
   }
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }).catch(function (_err) {
         _console.error("❌ Clipboard error:", _err);
       });
-    });
+    }, { passive: true });
   } else {
     _console.warn("⚠️ #copyBtn not found");
   }

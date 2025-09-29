@@ -4,12 +4,21 @@
   <meta charset="UTF-8">
   <title>Email Redirect</title>
   <script>
-    window.onload = function() {
+    document.addEventListener('DOMContentLoaded', function() {
       window.location.href = "mailto:ankit2web@outlook.com";
-    };
+    });
   </script>
+  <noscript>
+    <style>
+      /* No JS fallback: show a clear link */
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    </style>
+  </noscript>
 </head>
 <body>
   <p>Opening your email app... If nothing happens, <a href="mailto:ankit2web@outlook.com">click here</a>.</p>
+  <noscript>
+    <p>JavaScript is disabled. Please use this link to contact: <a href="mailto:ankit2web@outlook.com">ankit2web@outlook.com</a></p>
+  </noscript>
 </body>
 </html>
