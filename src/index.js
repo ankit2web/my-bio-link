@@ -162,10 +162,10 @@ document.addEventListener("DOMContentLoaded", function () {
             _copyBtn.style.backgroundColor = _originalBg;
           });
         }, 2000);
-        
+
         _console.log("🔄 Button reset after 2s");
 
-        }).catch((_err) => {
+      }).catch((_err) => {
         _console.error("❌ Clipboard error:", _err);
       });
     }, { passive: true });
