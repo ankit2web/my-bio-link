@@ -145,18 +145,27 @@ document.addEventListener("DOMContentLoaded", function () {
       _console.log("📋 #copyBtn clicked");
       const _url = _location;
       _console.log("🔗 Copying URL:", _url);
-      navigator.clipboard.writeText(_url).then(function () {
-        const _originalText = _copyBtn.textContent;
-        const _originalBg = _copyBtn.style.backgroundColor;
+      navigator.clipboard.writeText(_url).then(() => {
+        const _originalText = _copyBtn.textContent; // read once
+        const _originalBg = getComputedStyle(_copyBtn).backgroundColor; // safer read
         _console.log("✅ URL copied to clipboard");
-        _copyBtn.textContent = "Copied!";
-        _copyBtn.style.backgroundColor = "#4caf50";
-        setTimeout(function () {
-          _copyBtn.textContent = _originalText;
-          _copyBtn.style.backgroundColor = _originalBg;
-          _console.log("🔄 Button reset after 2s");
+
+        // update the button text and background color
+        requestAnimationFrame(() => {
+          _copyBtn.textContent = "Copied!";
+          _copyBtn.style.backgroundColor = "#4caf50";
+        });
+
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            _copyBtn.textContent = _originalText;
+            _copyBtn.style.backgroundColor = _originalBg;
+          });
         }, 2000);
-      }).catch(function (_err) {
+        
+        _console.log("🔄 Button reset after 2s");
+
+        }).catch((_err) => {
         _console.error("❌ Clipboard error:", _err);
       });
     }, { passive: true });
