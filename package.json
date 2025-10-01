@@ -2,7 +2,8 @@
   "name": "my-portfolio-site",
   "version": "1.0.0",
   "scripts": {
-    "build": "parcel build src/index.html --no-source-maps --public-url ./ --dist-dir dist"
+    "build": "parcel build src/index.html --no-source-maps --public-url ./ --dist-dir dist",
+    "dev": "parcel serve src/index.html --open"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^7.0.2",
