@@ -2,13 +2,14 @@
   "name": "my-portfolio-site",
   "version": "1.0.0",
   "scripts": {
-    "build": "parcel build src/index.html --no-source-maps --public-url ./ --dist-dir dist",
-    "dev": "parcel serve src/index.html --open"
+    "build": "vite build --emptyOutDir",
+    "preview": "vite preview",
+    "dev": "vite serve"
   },
   "dependencies": {
-    "@fullhuman/postcss-purgecss": "^7.0.2",
-    "parcel": "^2.12.0",
-    "postcss": "^8.5.6"
+    "postcss": "^8.5.6",
+    "vite": "^7.1.7",
+    "vite-plugin-purgecss": "^0.2.13"
   },
   "sideEffects": false
 }
