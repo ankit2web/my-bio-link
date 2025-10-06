@@ -2,9 +2,10 @@
   "name": "my-portfolio-site",
   "version": "1.0.0",
   "scripts": {
+    "start": "npm run dev",
     "build": "vite build --emptyOutDir",
     "preview": "vite preview",
-    "dev": "vite serve"
+    "dev": "vite"
   },
   "dependencies": {
     "postcss": "^8.5.6",

@@ -2,12 +2,28 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   var loader = document.getElementById('loader');
-  if (loader) {
-    // this.window.onload = function() {
-    setTimeout(function () {
-      loader.style.display = 'none';
-    }, 2000);
+  if (!loader) return;
+
+  function hideLoader() {
+    if (!loader || loader.classList.contains('is-hidden')) return;
+    loader.classList.add('is-hidden');
+    loader.setAttribute('aria-busy', 'false');
+    setTimeout(function () { loader.style.display = 'none'; }, 300);
   }
+
+  function onWindowLoad() {
+    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    fontsReady.then(hideLoader);
+  }
+
+  if (document.readyState === 'complete') {
+    onWindowLoad();
+  } else {
+    window.addEventListener('load', onWindowLoad, { once: true });
+  }
+
+  // Safety timeout so the loader never blocks indefinitely
+  setTimeout(hideLoader, 15000);
 });
 
 const disallowedDomains = [
