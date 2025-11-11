@@ -649,6 +649,8 @@ button:active {
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 1;
+    transition: opacity .3s ease;
 }
 
 .loader {
@@ -694,6 +696,12 @@ button:active {
     }
 }
 
+/* Fade-out state applied by JS */
+.loader-wrapper.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* Screen-reader-only utility */
 .sr-only {
     position: absolute;
@@ -709,9 +717,7 @@ button:active {
 
 /* Reduced motion: disable loader animation */
 @media (prefers-reduced-motion: reduce) {
-    .loader,
-    .loader:before,
-    .loader:after {
-        animation: none !important;
+    .loader-wrapper {
+        transition: none;
     }
 }
