@@ -33,33 +33,33 @@ const disallowedDomains = [
 ]
 
 class CustomConsole {
-  type(method, message) {
+  type(method, ...messages) {
     if (disallowedDomains.includes(window.location.hostname)) {
       return;
     }
 
     if (typeof console[method] === "function") {
-      console[method](message);
+      console[method](...messages);
     }
     else {
       throw new Error(`Console method ${method} is not supported.`);
     }
   }
 
-  log(message) {
-    this.type("log", message);
+  log(...messages) {
+    this.type("log", ...messages);
   }
 
-  warn(message) {
-    this.type("warn", message);
+  warn(...messages) {
+    this.type("warn", ...messages);
   }
 
-  error(message) {
-    this.type("error", message);
+  error(...messages) {
+    this.type("error", ...messages);
   }
 
-  info(message) {
-    this.type("info", message);
+  info(...messages) {
+    this.type("info", ...messages);
   }
 }
 
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (_openShare) {
     _openShare.addEventListener("click", function () {
       _console.log("🟢 #openShare clicked - opening share modal");
-      if (_shareModal) {
+      if (_shareModal && _shareModalParent) {
         _shareModal.classList.add("active-modal");
         _shareModalParent.classList.remove("hidden");
         _console.log("✅ active-modal added to #share_modal");
