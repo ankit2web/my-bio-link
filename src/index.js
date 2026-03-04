@@ -79,6 +79,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const _shareBackdrop = document.getElementById("shareBackdrop");
   const _location = window.location.href;
 
+  function flashCopySuccess() {
+    if (!_copyBtn) return;
+    const _originalText = _copyBtn.textContent;
+    const _originalBg = getComputedStyle(_copyBtn).backgroundColor;
+
+    requestAnimationFrame(() => {
+      _copyBtn.textContent = "Copied!";
+      _copyBtn.style.backgroundColor = "#4caf50";
+    });
+
+    setTimeout(() => {
+      requestAnimationFrame(() => {
+        _copyBtn.textContent = _originalText;
+        _copyBtn.style.backgroundColor = _originalBg;
+      });
+    }, 2000);
+  }
+
+  function fallbackCopyText(value) {
+    const tempTextArea = document.createElement("textarea");
+    tempTextArea.value = value;
+    tempTextArea.setAttribute("readonly", "");
+    tempTextArea.style.position = "fixed";
+    tempTextArea.style.opacity = "0";
+    tempTextArea.style.pointerEvents = "none";
+    document.body.appendChild(tempTextArea);
+
+    tempTextArea.select();
+    tempTextArea.setSelectionRange(0, tempTextArea.value.length);
+    const isCopied = document.execCommand("copy");
+    document.body.removeChild(tempTextArea);
+    return isCopied;
+  }
+
   _console.log("🔍 Element references:", {
     _openShare: !!_openShare,
     _closeShare: !!_closeShare,
@@ -161,29 +195,30 @@ document.addEventListener("DOMContentLoaded", function () {
       _console.log("📋 #copyBtn clicked");
       const _url = _location;
       _console.log("🔗 Copying URL:", _url);
-      navigator.clipboard.writeText(_url).then(() => {
-        const _originalText = _copyBtn.textContent; // read once
-        const _originalBg = getComputedStyle(_copyBtn).backgroundColor; // safer read
-        _console.log("✅ URL copied to clipboard");
 
-        // update the button text and background color
-        requestAnimationFrame(() => {
-          _copyBtn.textContent = "Copied!";
-          _copyBtn.style.backgroundColor = "#4caf50";
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+        navigator.clipboard.writeText(_url).then(() => {
+          _console.log("✅ URL copied to clipboard");
+          flashCopySuccess();
+          _console.log("🔄 Button reset after 2s");
+        }).catch((_err) => {
+          _console.warn("⚠️ Clipboard API failed, trying fallback copy:", _err);
+          if (fallbackCopyText(_url)) {
+            _console.log("✅ URL copied to clipboard via fallback");
+            flashCopySuccess();
+            return;
+          }
+          _console.error("❌ Fallback clipboard copy failed");
         });
+        return;
+      }
 
-        setTimeout(() => {
-          requestAnimationFrame(() => {
-            _copyBtn.textContent = _originalText;
-            _copyBtn.style.backgroundColor = _originalBg;
-          });
-        }, 2000);
-
-        _console.log("🔄 Button reset after 2s");
-
-      }).catch((_err) => {
-        _console.error("❌ Clipboard error:", _err);
-      });
+      if (fallbackCopyText(_url)) {
+        _console.log("✅ URL copied to clipboard via fallback");
+        flashCopySuccess();
+      } else {
+        _console.error("❌ Clipboard copy unavailable in this browser");
+      }
     }, { passive: true });
   } else {
     _console.warn("⚠️ #copyBtn not found");
